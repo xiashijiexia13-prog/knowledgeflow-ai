@@ -1,0 +1,45 @@
+# Python bytecode and cache files
+__pycache__/
+*.py[cod]
+
+# Local virtual environments
+.venv/
+venv/
+
+# Environment variables and local secrets
+.env
+.env.*
+!.env.example
+
+# Test, coverage, and tool caches
+.pytest_cache/
+.coverage
+htmlcov/
+.mypy_cache/
+.ruff_cache/
+
+# Logs and temporary files
+logs/
+*.log
+*.tmp
+
+# Local knowledge-base data and generated vector indexes
+data/raw/*
+data/processed/*
+data/vector_store/*
+!data/raw/.gitkeep
+!data/processed/.gitkeep
+!data/vector_store/.gitkeep
+
+# Local model files (root directory only; do not ignore app/models/)
+/models/
+*.bin
+*.safetensors
+*.gguf
+
+# Editor and operating-system files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+desktop.ini
