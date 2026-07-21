@@ -1,3 +1,2 @@
 # Runtime dependencies
-# No third-party packages are required yet.
-# Add direct dependencies incrementally as project features are implemented.
+pydantic-settings==2.14.2
