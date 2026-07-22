@@ -17,6 +17,9 @@ class AppSettings(BaseSettings):
     log_backup_count: int = 3
     ollama_base_url: str = "http://localhost:11434"
     ollama_model: str = ""
+    embedding_model: str = "intfloat/multilingual-e5-small"
+    embedding_device: Literal["auto", "cpu", "cuda"] = "auto"
+    embedding_batch_size: int = 16
     data_dir: Path = Path("data")
 
     model_config = SettingsConfigDict(

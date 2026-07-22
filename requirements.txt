@@ -1,3 +1,4 @@
 # Runtime dependencies
 pydantic-settings==2.14.2
 pymupdf==1.28.0
+sentence-transformers==5.6.0

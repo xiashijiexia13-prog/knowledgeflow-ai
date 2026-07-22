@@ -11,3 +11,7 @@ class ConfigurationError(KnowledgeFlowError):
 
 class DocumentLoadError(KnowledgeFlowError):
     """Raised when a source document cannot be validated or parsed."""
+
+
+class EmbeddingError(KnowledgeFlowError):
+    """Raised when text cannot be converted into embedding vectors."""
