@@ -7,3 +7,7 @@ class KnowledgeFlowError(Exception):
 
 class ConfigurationError(KnowledgeFlowError):
     """Raised when application configuration contains an invalid value."""
+
+
+class DocumentLoadError(KnowledgeFlowError):
+    """Raised when a source document cannot be validated or parsed."""
