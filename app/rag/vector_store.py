@@ -13,11 +13,14 @@ from app.models.document import SupportedFileType
 class ChromaVectorStore:
     """Store, query, delete, and rebuild a local cosine-similarity collection."""
 
-    def __init__(self, persist_directory: Path, collection_name: str):
+    def __init__(self, persist_directory: Path | None, collection_name: str):
         self.persist_directory = persist_directory
         self.collection_name = collection_name
-        persist_directory.mkdir(parents=True, exist_ok=True)
-        self._client = chromadb.PersistentClient(path=str(persist_directory))
+        if persist_directory is None:
+            self._client = chromadb.Client()
+        else:
+            persist_directory.mkdir(parents=True, exist_ok=True)
+            self._client = chromadb.PersistentClient(path=str(persist_directory))
         self._collection = self._get_or_create_collection()
 
     @property

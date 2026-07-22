@@ -27,7 +27,7 @@ class AppSettings(BaseSettings):
     vector_store_dir: Path = Path("data/vector_store")
     chroma_collection: str = "knowledgeflow"
     retrieval_top_k: int = 4
-    retrieval_min_score: float = 0.45
+    retrieval_min_score: float = 0.86
     max_context_chars: int = 8_000
     max_upload_bytes: int = 10 * 1024 * 1024
     data_dir: Path = Path("data")

@@ -1,0 +1,26 @@
+{
+  "evaluated_at": "2026-07-22",
+  "environment": {
+    "python": "3.14.6",
+    "embedding_model": "intfloat/multilingual-e5-small",
+    "vector_store": "chromadb 1.5.9",
+    "top_k": 4,
+    "min_score": 0.86
+  },
+  "dataset": {
+    "total_questions": 10,
+    "answerable_questions": 7,
+    "unanswerable_questions": 3
+  },
+  "metrics": {
+    "recall_at_4": 1.0,
+    "top_1_source_accuracy": 1.0,
+    "unanswerable_refusal_accuracy": 1.0,
+    "average_retrieval_ms": 24.84
+  },
+  "limitations": [
+    "The dataset is intentionally small and is not a production benchmark.",
+    "Latency depends on hardware, cache state, and background load.",
+    "The threshold was calibrated on this dataset and should be re-evaluated for new domains."
+  ]
+}

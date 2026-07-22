@@ -1,0 +1,72 @@
+[
+  {
+    "question": "公司的年假申请流程是什么？",
+    "expected_answer": "至少提前3个工作日在内部系统提交，并由直属主管审批。",
+    "expected_document": "employee_handbook.md",
+    "should_answer": true,
+    "required_terms": ["3个工作日", "直属主管"]
+  },
+  {
+    "question": "连续病假三天需要提供什么？",
+    "expected_answer": "返岗后提交医院证明。",
+    "expected_document": "employee_handbook.md",
+    "should_answer": true,
+    "required_terms": ["医院", "证明"]
+  },
+  {
+    "question": "每周最多可以远程办公几天？",
+    "expected_answer": "每周最多2天。",
+    "expected_document": "employee_handbook.md",
+    "should_answer": true,
+    "required_terms": ["2天"]
+  },
+  {
+    "question": "费用发生后多久内要申请报销？",
+    "expected_answer": "30个自然日内。",
+    "expected_document": "finance_policy.md",
+    "should_answer": true,
+    "required_terms": ["30", "自然日"]
+  },
+  {
+    "question": "超过2000元的费用由谁审批？",
+    "expected_answer": "直属主管和部门负责人审批。",
+    "expected_document": "finance_policy.md",
+    "should_answer": true,
+    "required_terms": ["直属主管", "部门负责人"]
+  },
+  {
+    "question": "公司密码至少要多少个字符？",
+    "expected_answer": "至少12个字符。",
+    "expected_document": "security_guide.md",
+    "should_answer": true,
+    "required_terms": ["12"]
+  },
+  {
+    "question": "发现钓鱼邮件后应该怎么办？",
+    "expected_answer": "立即停止相关操作并通过安全事件工单联系IT服务台。",
+    "expected_document": "security_guide.md",
+    "should_answer": true,
+    "required_terms": ["停止", "IT服务台"]
+  },
+  {
+    "question": "公司停车位每月收费多少？",
+    "expected_answer": "知识库未提供该信息。",
+    "expected_document": null,
+    "should_answer": false,
+    "required_terms": []
+  },
+  {
+    "question": "海外出差可以乘坐头等舱吗？",
+    "expected_answer": "知识库未提供该信息。",
+    "expected_document": null,
+    "should_answer": false,
+    "required_terms": []
+  },
+  {
+    "question": "办公室允许携带宠物吗？",
+    "expected_answer": "知识库未提供该信息。",
+    "expected_document": null,
+    "should_answer": false,
+    "required_terms": []
+  }
+]
