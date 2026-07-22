@@ -12,6 +12,9 @@ class AppSettings(BaseSettings):
     app_name: str = "KnowledgeFlow AI"
     app_env: Literal["development", "test", "production"] = "development"
     log_level: Literal["DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL"] = "INFO"
+    log_dir: Path = Path("logs")
+    log_max_bytes: int = 1_048_576
+    log_backup_count: int = 3
     ollama_base_url: str = "http://localhost:11434"
     ollama_model: str = ""
     data_dir: Path = Path("data")
