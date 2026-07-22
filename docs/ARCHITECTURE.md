@@ -55,6 +55,7 @@ app/main.py → app/api
 | `.dockerignore` | 告诉 Docker 构建时不要复制无关或敏感文件。 |
 | `Dockerfile` | Docker 的默认镜像构建描述文件名。 |
 | `README.md` | GitHub 仓库首页；`README` 意为“先读我”。 |
+| `.streamlit/config.toml` | Streamlit 项目级配置；关闭使用统计，避免开发界面产生不必要的遥测和用户目录写入。 |
 
 ### `app/core`：基础设施
 
