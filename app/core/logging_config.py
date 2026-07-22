@@ -4,6 +4,8 @@ import logging
 from logging.handlers import RotatingFileHandler
 from pathlib import Path
 
+from app.core.exceptions import ConfigurationError
+
 
 LOG_FORMAT = "%(asctime)s | %(levelname)s | %(name)s | %(message)s"
 DATE_FORMAT = "%Y-%m-%d %H:%M:%S"
@@ -22,13 +24,13 @@ def configure_logging(
     numeric_level = getattr(logging, normalized_level, None)
 
     if not isinstance(numeric_level, int):
-        raise ValueError(f"Unsupported log level: {log_level}")
+        raise ConfigurationError(f"Unsupported log level: {log_level}")
 
     if max_bytes <= 0:
-        raise ValueError("max_bytes must be greater than zero")
+        raise ConfigurationError("max_bytes must be greater than zero")
 
     if backup_count < 0:
-        raise ValueError("backup_count cannot be negative")
+        raise ConfigurationError("backup_count cannot be negative")
 
     handlers: list[logging.Handler] = [logging.StreamHandler()]
 
