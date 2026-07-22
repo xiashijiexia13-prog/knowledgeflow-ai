@@ -80,8 +80,16 @@ def test_document_lifecycle_and_build(client: TestClient) -> None:
     assert build.status_code == 200
     assert build.json()["documents"] == 1
 
-    assert client.delete(f"/api/v1/documents/{document_id}").status_code == 200
+    replacement = client.put(
+        f"/api/v1/documents/{document_id}",
+        files={"file": ("handbook-v2.md", "updated leave policy", "text/markdown")},
+    )
+    assert replacement.status_code == 200
+    replacement_id = replacement.json()["document_id"]
+    assert replacement_id != document_id
     assert client.delete(f"/api/v1/documents/{document_id}").status_code == 404
+    assert client.delete(f"/api/v1/documents/{replacement_id}").status_code == 200
+    assert client.delete(f"/api/v1/documents/{replacement_id}").status_code == 404
 
 
 def test_chat_validation_and_response(client: TestClient) -> None:

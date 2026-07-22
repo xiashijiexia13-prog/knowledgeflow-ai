@@ -67,6 +67,27 @@ async def upload_document(
     return DocumentResponse.from_document(document)
 
 
+@router.put(
+    "/documents/{document_id}",
+    response_model=DocumentResponse,
+    tags=["documents"],
+)
+async def replace_document(
+    document_id: str,
+    container: ContainerDependency,
+    file: UploadFile = File(...),
+) -> DocumentResponse:
+    """Replace a managed source and invalidate vectors derived from the old one."""
+
+    content = await file.read(container.settings.max_upload_bytes + 1)
+    document = container.document_manager.replace(
+        document_id,
+        file.filename or "",
+        content,
+    )
+    return DocumentResponse.from_document(document)
+
+
 @router.get("/documents", response_model=list[DocumentResponse], tags=["documents"])
 def list_documents(container: ContainerDependency) -> list[DocumentResponse]:
     """List documents currently managed by the application."""

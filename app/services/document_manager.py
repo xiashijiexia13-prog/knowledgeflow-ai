@@ -98,10 +98,32 @@ class DocumentManager:
     def delete(self, document_id: str) -> StoredDocument:
         """Delete one source file and all vectors derived from it."""
 
+        document = self._find(document_id)
+        document.file_path.unlink()
+        self.vector_store.delete_document(document_id)
+        return document
+
+    def replace(
+        self,
+        document_id: str,
+        original_filename: str,
+        content: bytes,
+    ) -> StoredDocument:
+        """Validate a replacement before removing the old file and vectors."""
+
+        existing = self._find(document_id)
+        replacement = self.save(original_filename, content)
+        try:
+            existing.file_path.unlink()
+            self.vector_store.delete_document(document_id)
+        except Exception:
+            replacement.file_path.unlink(missing_ok=True)
+            raise
+        return replacement
+
+    def _find(self, document_id: str) -> StoredDocument:
         for document in self.list_documents():
             if document.document_id == document_id:
-                document.file_path.unlink()
-                self.vector_store.delete_document(document_id)
                 return document
         raise DocumentNotFoundError(f"Document not found: {document_id}")
 
