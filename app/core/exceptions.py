@@ -15,3 +15,7 @@ class DocumentLoadError(KnowledgeFlowError):
 
 class EmbeddingError(KnowledgeFlowError):
     """Raised when text cannot be converted into embedding vectors."""
+
+
+class LLMServiceError(KnowledgeFlowError):
+    """Raised when the configured language-model service cannot respond."""

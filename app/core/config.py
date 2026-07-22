@@ -16,7 +16,9 @@ class AppSettings(BaseSettings):
     log_max_bytes: int = 1_048_576
     log_backup_count: int = 3
     ollama_base_url: str = "http://localhost:11434"
-    ollama_model: str = ""
+    ollama_model: str = "qwen3:4b"
+    ollama_timeout_seconds: float = 120.0
+    ollama_temperature: float = 0.1
     embedding_model: str = "intfloat/multilingual-e5-small"
     embedding_device: Literal["auto", "cpu", "cuda"] = "auto"
     embedding_batch_size: int = 16
