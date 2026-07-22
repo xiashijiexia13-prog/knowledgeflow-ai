@@ -1,0 +1,24 @@
+FROM python:3.14.6-slim
+
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1 \
+    PIP_NO_CACHE_DIR=1
+
+WORKDIR /app
+
+COPY requirements.txt ./
+RUN python -m pip install --upgrade pip && \
+    python -m pip install -r requirements.txt
+
+COPY app ./app
+COPY main.py ./main.py
+
+RUN useradd --create-home --shell /usr/sbin/nologin knowledgeflow && \
+    mkdir -p /app/data/raw /app/data/vector_store /app/logs && \
+    chown -R knowledgeflow:knowledgeflow /app
+
+USER knowledgeflow
+
+EXPOSE 8000
+
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
