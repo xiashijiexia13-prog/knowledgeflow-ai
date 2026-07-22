@@ -20,6 +20,12 @@ class AppSettings(BaseSettings):
     embedding_model: str = "intfloat/multilingual-e5-small"
     embedding_device: Literal["auto", "cpu", "cuda"] = "auto"
     embedding_batch_size: int = 16
+    chunk_size: int = 500
+    chunk_overlap: int = 80
+    vector_store_dir: Path = Path("data/vector_store")
+    chroma_collection: str = "knowledgeflow"
+    retrieval_top_k: int = 4
+    retrieval_min_score: float = 0.45
     data_dir: Path = Path("data")
 
     model_config = SettingsConfigDict(

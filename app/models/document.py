@@ -37,3 +37,12 @@ class TextChunk(BaseModel):
     start_char: int = Field(ge=0)
     end_char: int = Field(gt=0)
     text: str = Field(min_length=1)
+
+
+class SearchResult(BaseModel):
+    """One retrieved chunk and its cosine similarity score."""
+
+    model_config = ConfigDict(frozen=True)
+
+    chunk: TextChunk
+    score: float = Field(ge=-1.0, le=1.0)
