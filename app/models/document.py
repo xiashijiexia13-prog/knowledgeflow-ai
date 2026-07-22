@@ -46,3 +46,26 @@ class SearchResult(BaseModel):
 
     chunk: TextChunk
     score: float = Field(ge=-1.0, le=1.0)
+
+
+class SourceReference(BaseModel):
+    """Source information safe to expose with a generated answer."""
+
+    model_config = ConfigDict(frozen=True)
+
+    document_id: str
+    document_name: str
+    page_number: int | None
+    chunk_id: str
+    score: float
+    excerpt: str
+
+
+class RAGAnswer(BaseModel):
+    """Grounded answer and the exact retrieved sources used to produce it."""
+
+    model_config = ConfigDict(frozen=True)
+
+    answer: str
+    answered: bool
+    sources: list[SourceReference]

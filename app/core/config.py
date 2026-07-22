@@ -28,6 +28,7 @@ class AppSettings(BaseSettings):
     chroma_collection: str = "knowledgeflow"
     retrieval_top_k: int = 4
     retrieval_min_score: float = 0.45
+    max_context_chars: int = 8_000
     data_dir: Path = Path("data")
 
     model_config = SettingsConfigDict(

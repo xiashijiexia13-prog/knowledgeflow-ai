@@ -71,7 +71,8 @@ class OllamaClient:
         try:
             response = self._client.post("/api/chat", json=payload)
             response.raise_for_status()
-            content = response.json()["message"]["content"].strip()
+            raw_content = response.json()["message"]["content"].strip()
+            content = _strip_thinking(raw_content)
         except httpx.TimeoutException as error:
             raise LLMServiceError("Ollama request timed out") from error
         except (httpx.HTTPError, KeyError, TypeError, ValueError) as error:
@@ -85,3 +86,13 @@ class OllamaClient:
         """Release the underlying HTTP connection pool."""
 
         self._client.close()
+
+
+def _strip_thinking(content: str) -> str:
+    """Return only the final answer when a Qwen model emits think tags."""
+
+    if "</think>" in content:
+        final_answer = content.rsplit("</think>", maxsplit=1)[1].strip()
+        if final_answer:
+            return final_answer
+    return content
