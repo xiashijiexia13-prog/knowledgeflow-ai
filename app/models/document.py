@@ -69,3 +69,16 @@ class RAGAnswer(BaseModel):
     answer: str
     answered: bool
     sources: list[SourceReference]
+
+
+class StoredDocument(BaseModel):
+    """Summary of one source file managed by the application."""
+
+    model_config = ConfigDict(frozen=True)
+
+    document_id: str
+    document_name: str
+    file_path: Path
+    file_type: SupportedFileType
+    page_count: int = Field(ge=1)
+    size_bytes: int = Field(ge=1)

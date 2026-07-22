@@ -7,6 +7,7 @@ from app.rag.embeddings import SentenceTransformerEmbeddingService
 from app.rag.pipeline import RAGPipeline
 from app.rag.retriever import SemanticRetriever
 from app.rag.vector_store import ChromaVectorStore
+from app.services.document_manager import DocumentManager
 from app.services.knowledge_base import KnowledgeBaseService
 from app.services.ollama_client import OllamaClient
 
@@ -18,6 +19,7 @@ class ApplicationContainer:
     settings: AppSettings
     embeddings: SentenceTransformerEmbeddingService
     vector_store: ChromaVectorStore
+    document_manager: DocumentManager
     knowledge_base: KnowledgeBaseService
     retriever: SemanticRetriever
     ollama: OllamaClient
@@ -35,6 +37,11 @@ class ApplicationContainer:
         vector_store = ChromaVectorStore(
             settings.vector_store_dir,
             settings.chroma_collection,
+        )
+        document_manager = DocumentManager(
+            settings.data_dir / "raw",
+            vector_store,
+            settings.max_upload_bytes,
         )
         knowledge_base = KnowledgeBaseService(
             embeddings,
@@ -63,6 +70,7 @@ class ApplicationContainer:
             settings=settings,
             embeddings=embeddings,
             vector_store=vector_store,
+            document_manager=document_manager,
             knowledge_base=knowledge_base,
             retriever=retriever,
             ollama=ollama,

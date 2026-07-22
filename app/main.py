@@ -3,11 +3,18 @@
 from contextlib import asynccontextmanager
 from collections.abc import AsyncIterator
 
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
+from fastapi.responses import JSONResponse
 
 from app.api.routes import router
 from app.core.config import load_settings
 from app.core.container import ApplicationContainer
+from app.core.exceptions import (
+    DocumentNotFoundError,
+    DuplicateDocumentError,
+    KnowledgeFlowError,
+    LLMServiceError,
+)
 from app.core.logging_config import configure_logging
 
 
@@ -36,6 +43,23 @@ def create_app(container: ApplicationContainer | None = None) -> FastAPI:
         lifespan=lifespan,
     )
     application.include_router(router, prefix="/api/v1")
+
+    @application.exception_handler(KnowledgeFlowError)
+    async def handle_application_error(
+        request: Request,
+        error: KnowledgeFlowError,
+    ) -> JSONResponse:
+        del request
+        if isinstance(error, DocumentNotFoundError):
+            status_code = 404
+        elif isinstance(error, DuplicateDocumentError):
+            status_code = 409
+        elif isinstance(error, LLMServiceError):
+            status_code = 503
+        else:
+            status_code = 400
+        return JSONResponse(status_code=status_code, content={"detail": str(error)})
+
     return application
 
 

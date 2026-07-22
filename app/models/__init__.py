@@ -5,6 +5,7 @@ from app.models.document import (
     RAGAnswer,
     SearchResult,
     SourceReference,
+    StoredDocument,
     TextChunk,
 )
 
@@ -13,5 +14,6 @@ __all__ = [
     "RAGAnswer",
     "SearchResult",
     "SourceReference",
+    "StoredDocument",
     "TextChunk",
 ]

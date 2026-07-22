@@ -19,3 +19,11 @@ class EmbeddingError(KnowledgeFlowError):
 
 class LLMServiceError(KnowledgeFlowError):
     """Raised when the configured language-model service cannot respond."""
+
+
+class DuplicateDocumentError(KnowledgeFlowError):
+    """Raised when uploaded content already exists in the document store."""
+
+
+class DocumentNotFoundError(KnowledgeFlowError):
+    """Raised when a requested document identifier does not exist."""
